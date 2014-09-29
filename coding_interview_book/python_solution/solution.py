@@ -209,7 +209,84 @@ def delete_a_node(node):
     return True
 
 #2.4
+#Hint: Maitain two linkedlists and then concatenate these two.
+#Gotca: pay attentions to "if" and "if else".
 def partition_by_x(head, x):
+    node_more_head = None
+    node_less_tail = None
+
+    while head != None:
+        #Update the more linkedlist, append to tail. more_head->...more
+        if head.data > x:
+            if not node_more_head:
+                node_more_head = LinkedListNode(head.data)
+                more_head = node_more_head
+            else:
+                node_more_tail = LinkedListNode(head.data)
+                while node_more_head.next != None:
+                    node_more_head = node_more_head.next
+                node_more_head.next = node_more_tail
+                print 'more: %s' % more_head.to_str()
+        else:
+        #Update the less linkedlist, update the head. less...->less_tail
+            if not node_less_tail:
+                node_less_tail = LinkedListNode(head.data)
+                less_tail = node_less_tail
+
+            else:
+                node_less_head = LinkedListNode(head.data)
+                node_less_head.next = node_less_tail
+                node_less_tail = node_less_head
+                print 'less: %s' % node_less_tail.to_str()
+
+        head = head.next
+    #concatenat. less...->less_tail->more_head->...more
+    less_tail.next = more_head
+
+    return node_less_tail
+
+#2.5
+def add_two_linkedlist(node1, node2):
+    #4->2->8->1->9: 91824    91824
+    #4->2->8->1->9: 91824     1824
+    #sum:          183648    93648
+    carry = 0
+    result_node = None
+
+    while node1 != None or node2 != None:
+        if node2 == None:
+            digit = node1.data + carry
+        if node1 == None:
+            digit = node2.data + carry
+        if node1 != None and node2 != None:
+            digit = node1.data + node2.data + carry
+
+        carry = 0 # reset carry
+
+        if digit >= 10:
+            digit = digit % 10
+            carry = 1
+
+        if result_node == None:
+            result_node = LinkedListNode(digit)
+        else:
+            result_node.append_to_tail(digit)
+
+        if node1 != None:
+            node1 = node1.next
+        if node2 != None:
+            node2 = node2.next
+
+    if carry != 0:
+        result_node.append_to_tail(carry)
+
+    return result_node
+
+
+
+
+
+
 
 
 
