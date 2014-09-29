@@ -68,9 +68,9 @@ class LinkedListNode(object):
         """
         results = list()
         while self.next != None:
-            results.append(self.data)
+            results.append(str(self.data))
             self = self.next
-        results.append(self.data)
+        results.append(str(self.data))
 
         return results
 
