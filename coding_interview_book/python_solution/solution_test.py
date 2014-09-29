@@ -36,5 +36,25 @@ class SolutionTest(unittest.TestCase):
         self.assertEqual(solution.compress_string('abbcccdddd'),
                      'a1b2c3d4')
 
+    def test_rotate_matrix(self):
+        pass
+
+    def test_set_zeros(self):
+        self.assertEqual(solution.set_zeros([[1,2,0,4],
+                                             [2,3,4,0],
+                                             [1,2,3,4],
+                                             [4,5,6,7]]),
+        [[0,0,0,0],
+         [0,0,0,0],
+         [1,2,0,0],
+         [4,5,0,0]
+         ])
+
+    def test_is_rotation(self):
+        self.assertEqual(solution.is_rotation('waterbottle','erbottlewat'),
+                                              True)
+        self.assertEqual(solution.is_rotation('waterbottle','erobttlewat'),
+                                              False)
+
 if __name__ == '__main__':
     unittest.main()
