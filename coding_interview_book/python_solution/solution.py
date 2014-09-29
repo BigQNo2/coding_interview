@@ -101,11 +101,49 @@ def compress_string(string):
 
     # return ''.join(result_list)
 
-
-
-
+#1.6
 def function():
     pass
 
-def function():
-    pass
+#1.7
+#Gotca: need to iterate, one for storing the zero index and the other to updates
+#, otherwise, matrix will be set to all 0.
+def set_zeros(matrix):
+    row_length = len(matrix)
+    column_length = len(matrix[0])
+    zeros_row_list = list()
+    zeros_column_list = list()
+
+    for i in range(0, row_length):
+        for j in range(0, column_length):
+            if matrix[i][j] == 0:
+                zeros_row_list.append(i)
+                zeros_column_list.append(j)
+
+    for i in range(0, row_length):
+        for j in range(0, column_length):
+            if i in zeros_row_list or j in zeros_column_list:
+                matrix[i][j] = 0
+
+    return matrix
+
+#1.8
+#Requirements: can only use is_substring() for one time.
+def is_rotation(string1, string2):
+    ext_string = string1 + string1
+
+    def is_substring(str1, str2):
+        if str2 in str1:
+            return True
+        else:
+            return False
+
+    if is_substring(ext_string, string2):
+        return True
+    else:
+        return False
+
+
+
+
+
