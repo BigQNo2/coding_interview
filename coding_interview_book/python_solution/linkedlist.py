@@ -62,3 +62,26 @@ class LinkedListNode(object):
             self = self.next
 
         return head
+
+    def to_list(self):
+        """convert a linkedlist to a list
+        """
+        results = list()
+        while self.next != None:
+            results.append(self.data)
+            self = self.next
+        results.append(self.data)
+
+        return results
+
+    def to_str(self):
+        """covert a linkedlist to a string
+        """
+        return ''.join(self.to_list())
+
+
+
+
+
+
+
