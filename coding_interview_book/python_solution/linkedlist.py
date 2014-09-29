@@ -78,10 +78,3 @@ class LinkedListNode(object):
         """covert a linkedlist to a string
         """
         return ''.join(self.to_list())
-
-
-
-
-
-
-
