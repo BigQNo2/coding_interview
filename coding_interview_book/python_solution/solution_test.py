@@ -3,13 +3,21 @@
 
 
 import unittest
+
+from linkedlist import LinkedListNode
 import solution
+
 
 class SolutionTest(unittest.TestCase):
 
     def setUp(self):
-
-        pass
+        head = LinkedListNode('a')
+        head = head.append_to_tail('b')
+        head = head.append_to_tail('b')
+        head = head.append_to_tail('c')
+        self.head = head #it's a->b->b->c
+        self.node = self.head.next.next #it's b. b->c
+        self.node_none = self.head.next.next.next #it's c. c->None
 
     def test_is_unique_chars(self):
         self.assertEqual(solution.is_unique_chars('aaaaa'), True)
@@ -44,17 +52,32 @@ class SolutionTest(unittest.TestCase):
                                              [2,3,4,0],
                                              [1,2,3,4],
                                              [4,5,6,7]]),
-        [[0,0,0,0],
-         [0,0,0,0],
-         [1,2,0,0],
-         [4,5,0,0]
-         ])
+                                            [[0,0,0,0],
+                                            [0,0,0,0],
+                                            [1,2,0,0],
+                                            [4,5,0,0]
+                                            ])
 
     def test_is_rotation(self):
         self.assertEqual(solution.is_rotation('waterbottle','erbottlewat'),
                                               True)
         self.assertEqual(solution.is_rotation('waterbottle','erobttlewat'),
                                               False)
+
+    def test_remove_duplicates(self):
+        self.assertEqual(solution.remove_duplicates(self.head).to_str(),'abc')
+        self.assertEqual(solution.remove_duplicates(self.head,
+                                                    followup=True).to_str(),
+                                                    'abc')
+
+    def test_find_the_kth_elem(self):
+        self.assertEqual(solution.find_the_kth_elem(self.head, 2),'b')
+        self.assertEqual(solution.find_the_kth_elem(self.head, 3),'a')
+
+    def test_delete_a_node(self):
+        self.assertEqual(solution.delete_a_node(self.node), True)
+        self.assertEqual(solution.delete_a_node(self.node_none), False)
+        self.assertEqual(self.head.to_str(),'abc')
 
 if __name__ == '__main__':
     unittest.main()
