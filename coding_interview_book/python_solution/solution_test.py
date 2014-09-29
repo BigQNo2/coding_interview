@@ -15,9 +15,24 @@ class SolutionTest(unittest.TestCase):
         head = head.append_to_tail('b')
         head = head.append_to_tail('b')
         head = head.append_to_tail('c')
+
+        other_head = LinkedListNode(4)
+        other_head = other_head.append_to_tail(2)
+        other_head = other_head.append_to_tail(8)
+        other_head = other_head.append_to_tail(1)
+        other_head = other_head.append_to_tail(9)
+
+        another_head = LinkedListNode(4)
+        another_head = another_head.append_to_tail(2)
+        another_head = another_head.append_to_tail(8)
+        another_head = another_head.append_to_tail(1)
+
         self.head = head #it's a->b->b->c
+        self.other_head = other_head #it's 4->2->8->1->9
+        self.another_head = another_head #it's 4->2->8->1
         self.node = self.head.next.next #it's b. b->c
         self.node_none = self.head.next.next.next #it's c. c->None
+
 
     def test_is_unique_chars(self):
         self.assertEqual(solution.is_unique_chars('aaaaa'), True)
@@ -78,6 +93,20 @@ class SolutionTest(unittest.TestCase):
         self.assertEqual(solution.delete_a_node(self.node), True)
         self.assertEqual(solution.delete_a_node(self.node_none), False)
         self.assertEqual(self.head.to_str(),'abc')
+
+    def test_partition(self):
+        self.assertEqual(solution.partition_by_x(self.other_head,
+                                                 3).to_str(),'12489')
+
+    def test_add_two_linkedlist(self):
+        self.assertEqual(solution.add_two_linkedlist(self.other_head,
+                                                     self.other_head).to_str(),
+                                                     '846381')
+        self.assertEqual(solution.add_two_linkedlist(self.other_head,
+                                                     self.another_head).to_str(),
+                                                     '84639')
+
+
 
 if __name__ == '__main__':
     unittest.main()
