@@ -1,7 +1,10 @@
 """A module contains the methods (interfaces) to solve the coding puzzles in 
 the book of coding interview"""
 
+from linkedlist import LinkedListNode
+
 ###chapter 1 Arrays and Strings###
+
 #1.1
 def is_unique_chars(string):
     target = string[0]
@@ -29,7 +32,7 @@ def is_permutation(string1, string2, method = 'sort'):
         str1_list = list(string1)
         str2_list = list(string2)
         str1_list.sort()
-        #Gotca list has sort method or sorted. Can specify keys.
+        #Gotca list has sort method or using sorted() in which,can specify keys.
         str2_list.sort()
         #list.sort() return a None. The list is already the sorted one.
         #sorted(string or iterable ones) return a sorted list.
@@ -82,7 +85,8 @@ def compress_string(string):
     result_list.append(last)
     result_list.append(str(count))
 
-    return ''.join(result_list) 
+    return ''.join(result_list)
+
 #dictionary is not ordered, so this algorithm may give wrong results.
     # result_dict = dict()
     # result_list = list()
@@ -142,6 +146,81 @@ def is_rotation(string1, string2):
         return True
     else:
         return False
+
+###chapter 2 LinkedList###
+
+#2.1
+def remove_duplicates(head, followup=False):
+    if not followup:
+        temp = head
+        previous = None
+        check_map = dict()
+        while head != None:
+            if check_map.has_key(head.data):
+                previous.next = head.next
+            else:
+                check_map.update({head.data:True})
+
+            previous = head# Need a previous node.
+            head = head.next
+
+        return temp
+
+    current = head
+    temp = head
+    while current != None:
+        target = current.data
+        runner = current 
+        # runner can not be a None, so we can just delete runner.next.
+        while runner.next != None:
+            if runner.next.data == target:
+                runner.next = runner.next.next
+            runner = runner.next
+        current = current.next
+
+    return temp
+
+#2.2
+#Hint: Using two runners with k differences. 
+def find_the_kth_elem(head, k):
+    slow_runner = head
+    fast_runner = head
+
+    for i in range(0, k):
+        fast_runner = fast_runner.next
+
+    while fast_runner != None:
+        temp = slow_runner
+        slow_runner = slow_runner.next
+        fast_runner = fast_runner.next
+
+    return temp.data
+
+#2.3
+#copy the next node data to current data and then delete this node
+def delete_a_node(node):
+    if node == None or node.next == None:
+        return False
+
+    node.data = node.next.data
+    node.next = node.next.next
+
+    return True
+
+#2.4
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
