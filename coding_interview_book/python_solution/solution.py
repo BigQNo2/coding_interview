@@ -151,6 +151,7 @@ def is_rotation(string1, string2):
 
 #2.1
 def remove_duplicates(head, followup=False):
+    #Using a dict that holds the data
     if not followup:
         temp = head
         previous = None
@@ -165,7 +166,7 @@ def remove_duplicates(head, followup=False):
             head = head.next
 
         return temp
-
+    # Without a buffer
     current = head
     temp = head
     while current != None:
@@ -197,7 +198,7 @@ def find_the_kth_elem(head, k):
     return temp.data
 
 #2.3
-#copy the next node data to current data and then delete this node
+#copy the next node data to current data and then delete the next node
 def delete_a_node(node):
     if node == None or node.next == None:
         return False
@@ -208,6 +209,8 @@ def delete_a_node(node):
     return True
 
 #2.4
+def partition_by_x(head, x):
+
 
 
 
