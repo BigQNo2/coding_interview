@@ -78,3 +78,8 @@ class LinkedListNode(object):
         """covert a linkedlist to a string
         """
         return ''.join(self.to_list())
+
+    def length(self):
+        """find the length of the linkedlist
+        """
+        return len(self.to_str())
