@@ -35,7 +35,27 @@ class SolutionTest(unittest.TestCase):
         loop5 = LinkedListNode(data='f', next=loop4)
         loop0.next = loop3
 
-        self.loop_head = loop5 #it's d->c->b->a->c
+        palindrome_odd = LinkedListNode('a')
+        palindrome_odd = palindrome_odd.append_to_tail('b')
+        palindrome_odd = palindrome_odd.append_to_tail('c')
+        palindrome_odd = palindrome_odd.append_to_tail('b')
+        palindrome_odd = palindrome_odd.append_to_tail('a')
+
+        palindrome_even = LinkedListNode('a')
+        palindrome_even = palindrome_even.append_to_tail('b')
+        palindrome_even = palindrome_even.append_to_tail('b')
+        palindrome_even = palindrome_even.append_to_tail('a')
+
+        palindrome = LinkedListNode('a')
+        palindrome = palindrome.append_to_tail('b')
+        palindrome = palindrome.append_to_tail('c')
+        palindrome = palindrome.append_to_tail('d')
+        palindrome = palindrome.append_to_tail('e')
+
+        self.palindrome = palindrome #it's a->b->c->d->e
+        self.palindrome_odd = palindrome_odd #it's a->b->c->b->a
+        self.palindrome_even = palindrome_even #it's a->b->b->a
+        self.loop_head = loop5 #it's f->e->d->c->b->a->d
         self.head = head #it's a->b->b->c
         self.other_head = other_head #it's 4->2->8->1->9
         self.another_head = another_head #it's 4->2->8->1
@@ -118,6 +138,11 @@ class SolutionTest(unittest.TestCase):
     def test_find_the_loop_beginning(self):
         self.assertEqual(solution.find_the_loop_beginning(self.loop_head).data,
                          'd')
+
+    def test_is_palindrome(self):
+        self.assertEqual(solution.is_palindrome(self.palindrome_odd), True)
+        self.assertEqual(solution.is_palindrome(self.palindrome_even), True)
+        self.assertEqual(solution.is_palindrome(self.palindrome), False)
 
 
 
