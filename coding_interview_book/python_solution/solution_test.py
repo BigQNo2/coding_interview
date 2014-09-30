@@ -1,7 +1,7 @@
 """Unit test for module solution.
 """
 
-
+import math
 import unittest
 
 from linkedlist import LinkedListNode
@@ -51,6 +51,10 @@ class SolutionTest(unittest.TestCase):
         palindrome = palindrome.append_to_tail('c')
         palindrome = palindrome.append_to_tail('d')
         palindrome = palindrome.append_to_tail('e')
+
+        self.board = [['x','x','o'],
+                      ['o','o','x'],
+                      ['x','o','x']]
 
         self.palindrome = palindrome #it's a->b->c->d->e
         self.palindrome_odd = palindrome_odd #it's a->b->c->b->a
@@ -144,8 +148,14 @@ class SolutionTest(unittest.TestCase):
         self.assertEqual(solution.is_palindrome(self.palindrome_even), True)
         self.assertEqual(solution.is_palindrome(self.palindrome), False)
 
+    def test_swap_numbers(self):
+        self.assertEqual(solution.swap_numbers(23,46),(46,23))
 
+    def test_has_won_tic_tac_toe(self):
+        self.assertEqual(solution.has_won_tic_tac_toe(self.board), True)
 
+    def test_trailing_zeros(self):
+        self.assertEqual(solution.trailing_zeros(59), 13)
 
 if __name__ == '__main__':
     unittest.main()
