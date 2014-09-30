@@ -371,7 +371,6 @@ def swap_numbers(a, b):
 
 #17.2
 #Hint: Check the rows columns and two diagonals respectively.
-#TODO: still bug, need to be fixed!
 def has_won_tic_tac_toe(board):
     row_length = len(board)
     column_length = len(board[0])
@@ -397,25 +396,20 @@ def has_won_tic_tac_toe(board):
 
     #check diagonal  
     for i in range(0, row_length):
-        for j in range(0, column_length):
-            if i == j:
-                print i, j
-                if board[j][i] != board[0][0]:
-                    break
-                if j == row_length - 1: # check all the items in diagonal
-                    print 'In lower diagonal!'
-                    return True
+        if board[i][i] != board[0][0]:
+            break
+        if i == row_length - 1: # check all the items in diagonal
+            print 'In lower diagonal!'
+            return True
 
     #check diagonal
     for i in range(0, row_length):
-        for j in range(0, column_length):
-            if i + j == row_length - 1:
-                print i,j
-                if board[j][i] != board[row_length-1][0]:
-                    return False
-                if j == row_length - 1:
-                    print 'In upper diagonal!'
-                    return True
+        if board[row_length-1-i][i] != board[row_length-1][0]:
+            print 'A draw!'
+            return False
+        if i == row_length - 1:
+            print 'In upper diagonal!'
+            return True
 
 #17.3
 #Hint: count the numbers of 5.
@@ -439,56 +433,6 @@ def trailing_zeros(n):
 
     return zeros_count
 
-
-
-
-
+#17.4
 
 ###chapter 18 Hard###
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
