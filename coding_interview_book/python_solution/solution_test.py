@@ -27,6 +27,15 @@ class SolutionTest(unittest.TestCase):
         another_head = another_head.append_to_tail(8)
         another_head = another_head.append_to_tail(1)
 
+        loop0 = LinkedListNode('a')
+        loop1 = LinkedListNode(data='b', next=loop0)
+        loop2 = LinkedListNode(data='c', next=loop1)
+        loop3 = LinkedListNode(data='d', next=loop2)
+        loop4 = LinkedListNode(data='e', next=loop3)
+        loop5 = LinkedListNode(data='f', next=loop4)
+        loop0.next = loop3
+
+        self.loop_head = loop5 #it's d->c->b->a->c
         self.head = head #it's a->b->b->c
         self.other_head = other_head #it's 4->2->8->1->9
         self.another_head = another_head #it's 4->2->8->1
@@ -105,6 +114,11 @@ class SolutionTest(unittest.TestCase):
         self.assertEqual(solution.add_two_linkedlist(self.other_head,
                                                      self.another_head).to_str(),
                                                      '84639')
+
+    def test_find_the_loop_beginning(self):
+        self.assertEqual(solution.find_the_loop_beginning(self.loop_head).data,
+                         'd')
+
 
 
 
