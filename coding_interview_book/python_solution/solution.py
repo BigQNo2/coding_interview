@@ -324,6 +324,45 @@ def find_the_loop_beginning(head):
 
     return slow_runner
 
+#2.7
+#Hint: Using two runners to find the middle.
+def is_palindrome(head):
+    slow_runner = head
+    fast_runner = head
+    stack = list()
+
+    while fast_runner != None and fast_runner.next != None:
+        stack.append(slow_runner.data)
+        slow_runner = slow_runner.next
+        fast_runner = fast_runner.next.next
+
+    if fast_runner != None: # odd, skip the middle.
+        slow_runner = slow_runner.next
+
+    while slow_runner != None:
+        if slow_runner.data != stack.pop():
+            return False
+        slow_runner = slow_runner.next
+
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
