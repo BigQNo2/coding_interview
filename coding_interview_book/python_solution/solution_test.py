@@ -56,6 +56,10 @@ class SolutionTest(unittest.TestCase):
                       ['o','o','x'],
                       ['x','o','x']]
 
+        self.board_diag = [['x','x','o'],
+                           ['o','x','x'],
+                           ['x','o','x']]
+
         self.palindrome = palindrome #it's a->b->c->d->e
         self.palindrome_odd = palindrome_odd #it's a->b->c->b->a
         self.palindrome_even = palindrome_even #it's a->b->b->a
@@ -152,7 +156,8 @@ class SolutionTest(unittest.TestCase):
         self.assertEqual(solution.swap_numbers(23,46),(46,23))
 
     def test_has_won_tic_tac_toe(self):
-        self.assertEqual(solution.has_won_tic_tac_toe(self.board), True)
+        self.assertEqual(solution.has_won_tic_tac_toe(self.board), False)
+        self.assertEqual(solution.has_won_tic_tac_toe(self.board_diag), True)
 
     def test_trailing_zeros(self):
         self.assertEqual(solution.trailing_zeros(59), 13)
