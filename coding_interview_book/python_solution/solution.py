@@ -246,41 +246,88 @@ def partition_by_x(head, x):
     return node_less_tail
 
 #2.5
-def add_two_linkedlist(node1, node2):
-    #4->2->8->1->9: 91824    91824
-    #4->2->8->1->9: 91824     1824
-    #sum:          183648    93648
+#TODO: finish the followup part later.
+def add_two_linkedlist(node1, node2, followup=False):
+    #4->2->8->1->9: 91824    4->2->8->1->9: 91824
+    #4->2->8->1->9: 91824    4->2->8->1:     1824
+    #sum:          183648                   93648
+
     carry = 0
     result_node = None
 
-    while node1 != None or node2 != None:
-        if node2 == None:
-            digit = node1.data + carry
-        if node1 == None:
-            digit = node2.data + carry
-        if node1 != None and node2 != None:
-            digit = node1.data + node2.data + carry
+    if not followup:
+        while node1 != None or node2 != None:
+            if node2 == None:
+                digit = node1.data + carry
+            if node1 == None:
+                digit = node2.data + carry
+            if node1 != None and node2 != None:
+                digit = node1.data + node2.data + carry
 
-        carry = 0 # reset carry
+            carry = 0 # reset carry
 
-        if digit >= 10:
-            digit = digit % 10
-            carry = 1
+            if digit >= 10:
+                digit = digit % 10
+                carry = 1
 
-        if result_node == None:
-            result_node = LinkedListNode(digit)
-        else:
-            result_node.append_to_tail(digit)
+            if result_node == None:
+                result_node = LinkedListNode(digit)
+            else:
+                result_node.append_to_tail(digit)
 
-        if node1 != None:
-            node1 = node1.next
-        if node2 != None:
-            node2 = node2.next
+            if node1 != None:
+                node1 = node1.next
+            if node2 != None:
+                node2 = node2.next
 
-    if carry != 0:
-        result_node.append_to_tail(carry)
+        if carry != 0:
+            result_node.append_to_tail(carry)
 
-    return result_node
+        return result_node
+
+#2.6
+#Hint: using different runners
+def find_the_loop_beginning(head):
+
+    #when slower goes into the loop, suppose that s=l, f=l+nx+k, where l is the 
+    #distance from beginning of the loop to the head, n is the size of the loop
+    #, k is the distances between slower(s) and faster(f).
+
+    #when colliding, s=l+n-k, f=l+nx+k+n-k=(x+1)n+l, which means 
+    #it is n-l far away from the beginning.
+
+    #if we reset the s=0, it takes slower l steps to the beginnig if the loop
+    #and so does faster.
+
+    slow_runner = head
+    fast_runner = head
+
+#the first collision point on loop
+    while fast_runner != None or fast_runner.next != None:
+        #if fast_runner.next == None, fast_runner.next.next causes error.
+        fast_runner = fast_runner.next.next
+        slow_runner = slow_runner.next
+        if fast_runner == slow_runner:
+            print fast_runner.data
+            break
+
+    if fast_runner == None or fast_runner.next == None:
+        return False
+
+#reset slow_runner
+    slow_runner = head
+
+#Check the collision
+    while slow_runner != fast_runner:
+        slow_runner = slow_runner.next
+        fast_runner = fast_runner.next
+
+    return slow_runner
+
+
+
+
+
 
 
 
