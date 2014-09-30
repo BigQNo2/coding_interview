@@ -308,7 +308,6 @@ def find_the_loop_beginning(head):
         fast_runner = fast_runner.next.next
         slow_runner = slow_runner.next
         if fast_runner == slow_runner:
-            print fast_runner.data
             break
 
     if fast_runner == None or fast_runner.next == None:
@@ -345,6 +344,107 @@ def is_palindrome(head):
         slow_runner = slow_runner.next
 
     return True
+
+###chapter 3 Stacks and Queues###
+
+###chapter 4 Trees and Graphs###
+
+###chapter 11 Sorting and Searching###
+
+####Additional Review Problems####
+
+###chapter 17 Moderate###
+
+#17.1
+def swap_numbers(a, b):
+    print 'a: %s' % a
+    print 'b: %s' % b
+
+    a = a - b 
+    b = a + b #remebered that a = a - b, so b = a - b + b = a
+    a = b - a #remebered that a = a - b and b = a now , so b - a = b
+
+    print 'a: %s' % a
+    print 'b: %s' % b
+
+    return (a,b)
+
+#17.2
+#Hint: Check the rows columns and two diagonals respectively.
+#TODO: still bug, need to be fixed!
+def has_won_tic_tac_toe(board):
+    row_length = len(board)
+    column_length = len(board[0])
+
+    #check rows
+    for i in range(0, row_length):
+        for j in range(0, column_length):
+            if board[i][j] != board[i][i]:
+                break # if not, go to next outter loop
+            if j == column_length - 1: # check all the items in column
+                print 'In %sth rows!' % i
+                return True
+
+    #check columns
+    for i in range(0, row_length):
+        for j in range(0, column_length):
+            if board[j][i] != board[i][i]:
+                break
+            if j == column_length - 1:
+                print 'In %sth columns!' % i
+                return True
+
+
+    #check diagonal  
+    for i in range(0, row_length):
+        for j in range(0, column_length):
+            if i == j:
+                print i, j
+                if board[j][i] != board[0][0]:
+                    break
+                if j == row_length - 1: # check all the items in diagonal
+                    print 'In lower diagonal!'
+                    return True
+
+    #check diagonal
+    for i in range(0, row_length):
+        for j in range(0, column_length):
+            if i + j == row_length - 1:
+                print i,j
+                if board[j][i] != board[row_length-1][0]:
+                    return False
+                if j == row_length - 1:
+                    print 'In upper diagonal!'
+                    return True
+
+#17.3
+#Hint: count the numbers of 5.
+def trailing_zeros(n):
+# 2x5 = 10, 2 is in every even, just count numbers of 5.
+    def _count_zeros(k, count=0):
+        if k % 5 == 0:
+            count += 1
+            k = k / 5
+            return _count_zeros(k, count=count)
+        else:
+            return count
+
+    zeros_count = 0
+
+    for i in range(1, n+1):
+        zeros_count += _count_zeros(i)
+
+        if i % 5 == 0:
+            print '%s has %s 5' % (i, _count_zeros(i))
+
+    return zeros_count
+
+
+
+
+
+
+###chapter 18 Hard###
 
 
 
