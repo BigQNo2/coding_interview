@@ -162,5 +162,31 @@ class SolutionTest(unittest.TestCase):
     def test_trailing_zeros(self):
         self.assertEqual(solution.trailing_zeros(59), 13)
 
+    def test_find_maximum(self):
+        self.assertEqual(solution.find_maximum(123, 100), 123)
+        self.assertEqual(solution.find_maximum(1234, 10000), 10000)
+
+    def test_game_master(self):
+        self.assertEqual(solution.game_master(('R','B','B','B'),
+                                              ('B','R','Y','B')),
+                                              {'hit': 1, 'pesdo_hit': 3})
+        self.assertEqual(solution.game_master(('R','B','G','Y'),
+                                              ('R','B','G','Y')),
+                                              {'hit': 4, 'pesdo_hit': 0})
+        self.assertEqual(solution.game_master(('R','B','G','Y'),
+                                              ('Y','G','B','R')),
+                                              {'hit': 0, 'pesdo_hit': 4})
+        self.assertEqual(solution.game_master(('Y','G','G','Y'),
+                                              ('G','G','Y','Y')),
+                                              {'hit': 2, 'pesdo_hit': 2})
+
+    def test_translate_the_number(self):
+        self.assertEqual(solution.translate_the_number(1063434),
+                         ('One Million,Sixty Three Thousands,'
+                           'Four Hundreds Thirty Four.'))
+        self.assertEqual(solution.translate_the_number(2111063434),
+                 ('Two Billions,One Hundred and Eleven Millions,'
+                  'Sixty Three Thousands,Four Hundreds Thirty Four.'))
+
 if __name__ == '__main__':
     unittest.main()
