@@ -485,7 +485,7 @@ def game_master(solution, guess):
                 pseudo_hit += 1
                 check_map[guess[i]] -= 1
 
-    result = {'hit':hit, 'pesdo_hit':pseudo_hit}
+    result = {'hit':hit, 'pseudo_hit':pseudo_hit}
 
     return result
 
@@ -591,29 +591,5 @@ def translate_the_number(long_number):
         count -=1
 
     return translated_number
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ###chapter 18 Hard###

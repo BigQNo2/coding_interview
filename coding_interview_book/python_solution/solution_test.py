@@ -169,16 +169,16 @@ class SolutionTest(unittest.TestCase):
     def test_game_master(self):
         self.assertEqual(solution.game_master(('R','B','B','B'),
                                               ('B','R','Y','B')),
-                                              {'hit': 1, 'pesdo_hit': 3})
+                                              {'hit': 1, 'pseudo_hit': 3})
         self.assertEqual(solution.game_master(('R','B','G','Y'),
                                               ('R','B','G','Y')),
-                                              {'hit': 4, 'pesdo_hit': 0})
+                                              {'hit': 4, 'pseudo_hit': 0})
         self.assertEqual(solution.game_master(('R','B','G','Y'),
                                               ('Y','G','B','R')),
-                                              {'hit': 0, 'pesdo_hit': 4})
+                                              {'hit': 0, 'pseudo_hit': 4})
         self.assertEqual(solution.game_master(('Y','G','G','Y'),
                                               ('G','G','Y','Y')),
-                                              {'hit': 2, 'pesdo_hit': 2})
+                                              {'hit': 2, 'pseudo_hit': 2})
 
     def test_translate_the_number(self):
         self.assertEqual(solution.translate_the_number(1063434),
