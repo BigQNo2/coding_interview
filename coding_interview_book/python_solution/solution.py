@@ -434,5 +434,186 @@ def trailing_zeros(n):
     return zeros_count
 
 #17.4
+#Restrcition: can not use if else statements.
+#Hint: Check the sign bit.
+def find_maximum(a,b):
+
+    def _flip(bit):
+        #bit =0, return 1, bit = 1, return 0
+        return bit ^ 1
+
+    def _sign(integer):
+        #positive, return 0, negetive, return 1
+        return integer >>31 & 0x1
+
+    s = _sign(a - b)
+
+    print 'sign: %s' % s
+    print 'flip sign: %s' % _flip(s)
+
+    return a * _flip(s) + b * s
+
+#17.5
+#Attention: hit is never a pseudo_hit, so we need to check twice for hit and
+#pseudo_hit respectively.
+def game_master(solution, guess):
+    if len(guess) != len(solution):
+        return False
+
+    check_map = dict()
+    hit = 0
+    pseudo_hit = 0
+    count = 1
+
+    #make a map that holds the keys and their counts.
+    for i in range(0, len(solution)):
+        if check_map.has_key(solution[i]):
+            check_map[solution[i]] += 1
+        else:
+            check_map.update({solution[i]: count})
+
+    #Check the hit by iteration. Update the counts.
+    for i in range(0, len(guess)):
+        if guess[i] == solution[i]:
+            hit += 1
+            check_map[solution[i]] -= 1
+
+    #Check the pseudo_hit by the key and count in check_map. Update the counts.
+    for i in range(0, len(guess)):
+        if check_map.has_key(guess[i]):
+            if check_map[guess[i]] != 0:
+                pseudo_hit += 1
+                check_map[guess[i]] -= 1
+
+    result = {'hit':hit, 'pesdo_hit':pseudo_hit}
+
+    return result
+
+#17.6
+def find_unsorted_sequences(array):
+    pass
+
+#17.7
+#Attentions: the special situations.
+def translate_the_number(long_number):
+
+    def _translate_three_digits(number):
+
+        magnitudes = ('Hundred ','Hundreds ')
+
+        digit_list = ('Zero ', 'One ', 'Two ', 'Three ', 'Four ',
+                      'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ')
+
+        one_digit_list = ('Ten ', 'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ',
+                          'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ',
+                          'Nineteen ')
+
+        second_digit_list = ('Twenty ', 'Thirty ', 'Fourty ', 'Fifty ',
+                             'Sixty ', 'Seventy ', 'Eighty ', 'Ninety ')
+
+        if number / 1000 == 0:
+
+            hundreds = number / 100
+            decades = number % 100 / 10
+            units = number % 100 % 10
+
+            units_result = digit_list[units]
+
+            if hundreds != 0:
+
+                if hundreds == 1:
+                    hundreds_result = digit_list[hundreds] + magnitudes[0]
+
+                else:
+                    hundreds_result = digit_list[hundreds] + magnitudes[1]
+
+                if decades == 0:
+                    if units == 0:
+                        result = hundreds_result
+                        return result.strip()
+                    else:
+                        result = hundreds_result + 'and ' + units_result
+                        return result.strip()
+
+                elif decades == 1:
+                    decades_result = one_digit_list[units]
+                    result = hundreds_result + 'and ' + decades_result
+                    return result.strip()
+
+                else:
+                    if units_result == 'Zero ':
+                        decades_result = second_digit_list[decades-2]
+                    else:
+                        decades_result = second_digit_list[decades-2] + units_result
+                    result = hundreds_result + decades_result
+                    return result.strip()
+            else:
+                if decades == 0:
+                    result = units_result
+                    return result.strip()
+
+                elif decades == 1:
+                    decades_result = one_digit_list[units]
+                    result = decades_result
+                    return result.strip()
+                else:
+                    if units_result == 'Zero ':
+                        decades_result = second_digit_list[decades-2]
+                    else:
+                        decades_result = (second_digit_list[decades-2]
+                                          + units_result)
+                    result = decades_result
+                    return result.strip()
+        else:
+            print 'your number is not a three digit number!'
+            return False
+
+    number_list = list()
+    translated_number= ''
+    magnitudes_list = (('.', '.'), (' Thousand,', ' Thousands,'),
+                       (' Million,', ' Millions,'),
+                       (' Billion,', ' Billions,'))
+    count =0
+
+    while long_number != 0:
+        number = long_number % 1000
+        long_number = long_number / 1000
+        number_list.append(_translate_three_digits(number))
+        count += 1
+
+    #Gotca: index of list or tuple in python could be negative.
+    while number_list:
+        if number_list[count - 1]== 'One':
+            translated_number += (number_list.pop()
+                                  + magnitudes_list[count-1][0])
+        else:
+            translated_number += number_list.pop() + magnitudes_list[count-1][1]
+        count -=1
+
+    return translated_number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ###chapter 18 Hard###
