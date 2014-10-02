@@ -490,8 +490,54 @@ def game_master(solution, guess):
     return result
 
 #17.6
+#Hint: Split the sequences and then shrink left and right sides.
+#Gotca: sublist in python list[n:m] where [n,m).
 def find_unsorted_sequences(array):
-    pass
+
+    def _find_left_index(alist):
+        i = 0
+        while alist[i] < alist[i+1]:
+            i += 1
+        print 'Left index: %s' % i
+        return i
+
+    def _find_right_index(alist):
+        i = len(alist) - 1
+        while alist[i] > alist[i-1]:
+            i -= 1
+        print 'Right index: %s' % i
+        return i
+
+    def _shrink_left(alist, index, min_value):
+        while alist[index - 1] > min_value:
+            index = index - 1 
+        print 'Shrinked left index: %s' % index
+        return index
+
+        
+    def _shrink_right(alist, index, max_value):
+        while alist[index + 1] < max_value:
+            index = index + 1
+        print 'Shrinked right index: %s' % index
+        return index
+
+    left_most = 0
+    right_most = 0
+
+    left_index = _find_left_index(array)
+    right_index = _find_right_index(array)
+
+    middle_left = left_index + 1
+    middle_right = right_index - 1
+
+    middle_min = min(array[middle_left:middle_right+1])
+    middle_max = max(array[middle_left:middle_right+1])
+
+    left_most = _shrink_left(array, middle_left, middle_min)
+    right_most = _shrink_right(array, middle_right, middle_max)
+
+    print 'Unsorted list: %s' % array[left_most:right_most+1]
+    return array[left_most:right_most+1]
 
 #17.7
 #Attentions: the special situations.
@@ -544,7 +590,8 @@ def translate_the_number(long_number):
                     if units_result == 'Zero ':
                         decades_result = second_digit_list[decades-2]
                     else:
-                        decades_result = second_digit_list[decades-2] + units_result
+                        decades_result = (second_digit_list[decades-2]
+                                          + units_result)
                     result = hundreds_result + decades_result
                     return result.strip()
             else:
@@ -591,5 +638,65 @@ def translate_the_number(long_number):
         count -=1
 
     return translated_number
+
+#17.8
+#TODO: try to find the sublist(s).
+def the_maximum_sum_sublist(alist):
+
+    def _all_negative(array):
+        for i in array:
+            if i > 0:
+                return False
+        return True
+
+    maxsum = 0
+    _sum = 0
+    left_index = 0
+    right_index = 0
+
+    if _all_negative(alist):
+        return max(alist)
+
+    for i in range(0, len(alist)):
+        _sum += alist[i]
+        if maxsum < _sum:
+            maxsum = _sum
+            right_index = i
+        elif _sum < 0:
+            _sum = 0
+            left_index = i + 1
+
+    result = {'sublist': alist[left_index:right_index+1], 'sum': maxsum}
+    print result
+
+    return maxsum
+
+#17.9
+def find_words_frequencies(book):
+
+    def _book_to_list(url):
+        mark_list = (',', '.', '?', '!', ':', ';')
+        f = open(url, 'r')
+        s = f.read()
+        s = s.replace('\n',' ')
+
+        for i in mark_list:
+            s = s.replace(i, '')
+
+        return s.split(' ')
+
+    word_list = _book_to_list(book)
+    result_map = dict()
+    count = 1
+
+    for words in word_list:
+        if result_map.has_key(words):
+            result_map[words] += 1
+        else:
+            result_map.update({words:count}) 
+
+    return result_map
+
+#17.10
 
 ###chapter 18 Hard###
