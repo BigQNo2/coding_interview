@@ -60,6 +60,7 @@ class SolutionTest(unittest.TestCase):
                            ['o','x','x'],
                            ['x','o','x']]
 
+        self.sequences = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
         self.palindrome = palindrome #it's a->b->c->d->e
         self.palindrome_odd = palindrome_odd #it's a->b->c->b->a
         self.palindrome_even = palindrome_even #it's a->b->b->a
@@ -69,6 +70,11 @@ class SolutionTest(unittest.TestCase):
         self.another_head = another_head #it's 4->2->8->1
         self.node = self.head.next.next #it's b. b->c
         self.node_none = self.head.next.next.next #it's c. c->None
+        self.words = {'Do': 1, 'Here': 1, 'I': 1, 'a': 2, 'book': 2,
+                      'check': 1, 'find': 1, 'for': 1, 'frequencies': 1,
+                      'important': 2, 'in': 2, 'is': 1, 'need': 1,
+                      'testing': 1, 'the': 2, 'this': 1, 'to': 1,
+                      'topics': 1, 'very': 6, 'words': 1}
 
 
     def test_is_unique_chars(self):
@@ -180,6 +186,10 @@ class SolutionTest(unittest.TestCase):
                                               ('G','G','Y','Y')),
                                               {'hit': 2, 'pseudo_hit': 2})
 
+    def test_find_unsorted_sequences(self):
+        self.assertEqual(solution.find_unsorted_sequences(self.sequences),
+                        [10,11,7,12,6,7])
+
     def test_translate_the_number(self):
         self.assertEqual(solution.translate_the_number(1063434),
                          ('One Million,Sixty Three Thousands,'
@@ -187,6 +197,16 @@ class SolutionTest(unittest.TestCase):
         self.assertEqual(solution.translate_the_number(2111063434),
                  ('Two Billions,One Hundred and Eleven Millions,'
                   'Sixty Three Thousands,Four Hundreds Thirty Four.'))
+
+    def test_the_maximum_sum_sublist(self):
+        self.assertEqual(solution.the_maximum_sum_sublist([3, -9, 6, -2, 3]),
+                         7)
+        self.assertEqual(solution.the_maximum_sum_sublist([-3, -9, -6, -2, -3]),
+                         -2)
+
+    def test_find_words_frequencies(self):
+        self.assertEqual(solution.find_words_frequencies('book.txt'),
+                         self.words)
 
 if __name__ == '__main__':
     unittest.main()
