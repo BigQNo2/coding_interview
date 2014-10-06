@@ -541,6 +541,8 @@ def find_unsorted_sequences(array):
 
 #17.7
 #Attentions: the special situations.
+#Gotca: Python x%y works perfectly on integers. However,
+#Floats need math.fmod(x,y) to be perfect as C.
 def translate_the_number(long_number):
 
     def _translate_three_digits(number):
