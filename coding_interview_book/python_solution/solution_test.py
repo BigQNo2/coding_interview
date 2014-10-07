@@ -2,6 +2,7 @@
 """
 
 import math
+import random
 import unittest
 
 from linkedlist import LinkedListNode
@@ -207,6 +208,25 @@ class SolutionTest(unittest.TestCase):
     def test_find_words_frequencies(self):
         self.assertEqual(solution.find_words_frequencies('book.txt'),
                          self.words)
+
+    def test_rand7(self):
+        r7 = solution.rand7()
+        N = 10000
+        x = list(next(r7) for i in range(N))
+        distr = [x.count(i) for i in range(7)]
+        expmean = N / 7.0
+        expstddev = math.sqrt(N * (1.0/7.0) * (6.0/7.0))
+        print '%d TRIALS' % N
+        print 'Expected mean: %.1f' % expmean
+        print 'Expected standard deviation: %.1f' % expstddev
+        print 'DISTRIBUTION:'
+        for i in range(7):
+            print ('%d: %d   (%+.3f stddevs)'
+                   % (i, distr[i], (distr[i] - expmean) / expstddev))
+
+    def test_two_sum(self):
+        self.assertEqual(solution.two_sum([1,2,3,4,5,3,0,6], 6),
+                                          {(4,0),(3,1),(5,2),(7,6)})
 
 if __name__ == '__main__':
     unittest.main()
