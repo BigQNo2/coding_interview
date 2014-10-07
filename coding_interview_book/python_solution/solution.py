@@ -1,5 +1,6 @@
 """A module contains the methods (interfaces) to solve the coding puzzles in 
 the book of coding interview"""
+import random
 
 from linkedlist import LinkedListNode
 
@@ -700,5 +701,37 @@ def find_words_frequencies(book):
     return result_map
 
 #17.10
+#Hints: rejecting sampling from 5*rand5 + rand5
+#Gotca: yield return a generator and Generators are iterators,
+#but you can only iterate over them once. Using next(iterator)/iterator.next()
+#It's because they do not store all the values in memory,
+#they generate the values on the fly.
+def rand7():
+    while True:
+        rand25 = 5 * random.randint(0,4) + random.randint(0,4)
+        if rand25 < 21:
+            yield rand25 % 7
+
+#17.11
+#Gotca: mutable objects are not hashable in python, such as list, dict, set.
+#set need its items to be hashable not itself. frozenset() is immutable and
+#hashable  
+def two_sum(aList, _sum):
+    check_map = dict()
+    result = set()
+    index = 0
+    #Better to use index here, because if the list holds the same items,
+    #list.index(item) only return the first found one.
+    for i in range(0, len(aList)): 
+        if check_map.has_key(aList[i]):
+            index = i
+            result.add((index,check_map[aList[i]]))
+        else:
+            check_map.update({_sum - aList[i]:i})
+
+    return result
+
+
+
 
 ###chapter 18 Hard###
